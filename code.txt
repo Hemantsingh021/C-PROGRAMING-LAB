@@ -1,108 +1,140 @@
 #include <stdio.h>
 
+// Define a structure to represent student information
+struct Student {
+    char name[50];
+    int rollNumber;
+
+    float marks;
+
+};
+
+
+
+
+// Function to write student data to a file
+
+void writeStudentData(const char *filename, struct Student students[], int size) {
+
+    FILE *file = fopen(filename, "w");
+
+
+
+
+
+
+
+
+    if (file == NULL) {
+
+        perror("Error opening file for writing");
+
+        return;
+
+    }
+
+
+
+
+    for (int i = 0; i < size; i++) {
+
+        fprintf(file, "%s %d %.2f\n", students[i].name, students[i].rollNumber, students[i].marks);
+
+    }
+
+
+
+
+    fclose(file);
+
+    printf("Student data written to the file successfully.\n");
+
+}
+
+
+
+
+// Function to read student data from a file
+
+void readStudentData(const char *filename) {
+
+    FILE *file = fopen(filename, "r");
+
+
+
+
+    if (file == NULL) {
+
+        perror("Error opening file for reading");
+
+        return;
+
+    }
+
+
+
+
+
+    printf("\nReading student data from the file:\n");
+
+
+
+
+
+    struct Student student;
+
+
+
+
+
+    while (fscanf(file, "%s %d %f", student.name, &student.rollNumber, &student.marks) != EOF) {
+
+        printf("Name: %s, Roll Number: %d, Marks: %.2f\n", student.name, student.rollNumber, student.marks);
+
+    }
+
+
+
+
+    fclose(file);
+
+}
+
 
 
 
 int main() {
 
-    // Writing to a file
+    // Declare an array of structures to store student data
 
-    FILE *writeFile = fopen("example.txt", "w");
+    struct Student students[3] = {
 
+        {"John Doe", 101, 85.5},
 
+        {"Jane Smith", 102, 92.0},
 
+        {"Bob Johnson", 103, 78.5}
 
+    };
 
 
 
 
+    const char *filename = "student_data.txt";
 
 
 
-    if (writeFile == NULL) {
 
-        perror("Error opening file for writing");
+    // Write student data to a file
 
-        return 1;
+    writeStudentData(filename, students, 3);
 
-    }
 
 
 
+    // Read and display student data from the file
 
-    fprintf(writeFile, "Hello, this is some data written to the file.\n");
-
-    fprintf(writeFile, "12345\n");
-
-    fprintf(writeFile, "3.14\n");
-
-
-
-
-    fclose(writeFile);
-
-    printf("Data written to the file successfully.\n");
-
-
-
-
-
-    // Reading from the file
-
-    FILE *readFile = fopen("example.txt", "r");
-
-
-
-
-
-    if (readFile == NULL) {
-
-        perror("Error opening file for reading");
-
-        return 1;
-
-    }
-
-
-
-
-    printf("\nReading data from the file:\n");
-
-
-
-
-    char buffer[100];
-
-
-
-
-    while (fgets(buffer, sizeof(buffer), readFile) != NULL) {
-
-        printf("%s", buffer);
-
-    }
-
-
-
-
-    fclose(readFile);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    readStudentData(filename);
 
 
 
