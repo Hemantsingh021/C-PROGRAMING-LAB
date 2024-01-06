@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+void FibusingGoto(int n)
+#include<stdio.h>
+void psbyval(int a,int b)
+{
+    int a = 0 ,b=1,sum=0;
+    labelfib:
+
+    if(n!=0)
+    {
+        printf("%d\n",a);
+        sum = a+b;
+        a = b;
+        b =sum;
+        n--;
+        goto labelfib;
+    }
+   int c=a;
+   a=b;
+   b=c;
+   printf("Swapping by pass by value\na=%d\nb=%d",a,b);
+}
+void psbyref(int a,int b)
+{
+   int *c,*d=&b,*f=&a;
+   c=f;
+   f=d;
+   d=c;
+   printf("\nSwapping by pass by reference\na=%d\nb=%d",*f,*d);
+
+}
+void main()
+{
+    int n=5;
+    FibusingGoto(n);
+   int a,b;
+   printf("Enter two numbers");
+   scanf("%d%d",&a,&b);
+   psbyval(a,b);
+   psbyref(a,b);
+}
