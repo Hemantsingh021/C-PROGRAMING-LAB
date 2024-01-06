@@ -1,17 +1,52 @@
 #include<stdio.h>
-struct info
-{
-    int m1,m2,m3,tm;
+
+
+
+
+union info {
+
+    int m, r;
+
+    char name[50];
+
 };
-void main()
-{
-struct info i1;
-printf("Enter marks of first subject");
-scanf("%d",&i1.m1);
-printf("Enter marks of second subject");
-scanf("%d",&i1.m2);
-printf("Enter marks of third subject");
-scanf("%d",&i1.m3);
-i1.tm=i1.m1+i1.m2+i1.m3;
-printf("Sum of marks is %d",i1.tm);
+
+
+
+
+int main(void) {
+
+    union info i1;
+
+
+
+
+    printf("Enter name: ");
+
+    scanf("%s", i1.name);
+
+
+
+
+    printf("Enter roll number: ");
+
+    scanf("%d", &i1.r);
+
+
+
+
+    printf("Enter marks: ");
+
+    scanf("%d", &i1.m);
+
+
+
+
+    printf("Name: %s\nRoll Number: %d\nMarks: %d\n", i1.name, i1.r, i1.m);
+
+
+
+
+    return 0;
+
 }
